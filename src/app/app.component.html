@@ -1,21 +1,49 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="container-principal">
+  <app-header></app-header>
+  <mat-sidenav-container id="sidenav-container" #sidenav style="height:92vh;width:100%;">
+    <mat-sidenav id="sidenav-content" mode="side" [opened]="sidenavOpened()" [class.mat-elevation-z2]>
 
-<router-outlet></router-outlet>
+      <mat-accordion multi="true">
+        <mat-expansion-panel expanded>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <b>LISTA DE COMANDOS</b>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list>
+            <div id="div-actions" *ngFor="let menuAction of menuActions">
+              <mat-list-item [matTooltip]="menuAction.description" matTooltipPosition="after" (click)="executeMenuAction(menuAction.id)">
+                {{menuAction.id}} - {{menuAction.name}}
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            </div>
+          </mat-list>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel *ngIf="menuActionsHistory && menuActionsHistory.length > 0" expanded>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <b>HISTORICO</b>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list>
+            <div id="div-actions" *ngFor="let menuActionHistory of menuActionsHistory">
+              <mat-list-item [matTooltip]="menuActionHistory.createdAt" matTooltipPosition="after">
+                {{menuActionHistory.id}} - {{menuActionHistory.name}}
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            </div>
+          </mat-list>
+
+        </mat-expansion-panel>
+
+      </mat-accordion>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div id="div-conteudo" class="container-fluid">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

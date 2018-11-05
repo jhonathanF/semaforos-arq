@@ -1,0 +1,24 @@
+.container-principal{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+}
+
+#div-conteudo{
+// min-height: 80%;
+}
+
+#sidenav-content{
+  width: 350px;
+}
+
+#sidenav-container{
+  margin-top:10px;
+  z-index: 0;
+}
+
+#div-actions{
+  cursor: pointer;
+}

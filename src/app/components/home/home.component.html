@@ -1,0 +1,17 @@
+<div id="main-div">
+  <div id="search-div" fxLayout="row">
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Executar comando">
+        <mat-icon matSuffix>send</mat-icon>
+      </mat-form-field>
+    </form>
+  </div>
+  <div id="full-width" fxLayout="row" fxLayoutAlign="center center">
+    <div id="content-div">
+      <img *ngFor="let tl of trafficLights" style="position:relative" [src]="tl.assetUrl" [style.top]="tl.style.top"
+        [style.right]="tl.style.right" [style.bottom]="tl.style.bottom" [style.left]="tl.style.left" [style.width]="tl.style.width"
+        [style.heigth]="tl.style.heigth" [style.transform]="'rotate(' + tl.style.rotation+')'">
+    </div>
+  </div>
+</div>
