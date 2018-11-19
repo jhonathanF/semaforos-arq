@@ -1,17 +1,20 @@
 <div id="main-div">
   <div id="search-div" fxLayout="row">
-    <form class="example-form">
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Executar comando">
-        <mat-icon matSuffix>send</mat-icon>
-      </mat-form-field>
-    </form>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Executar comando" [(ngModel)]="comando" (keyup.enter)="executarComando()">
+      <mat-icon matSuffix>send</mat-icon>
+    </mat-form-field>
   </div>
-  <div id="full-width" fxLayout="row" fxLayoutAlign="center center">
-    <div id="content-div">
-      <img *ngFor="let tl of trafficLights" style="position:relative" [src]="tl.assetUrl" [style.top]="tl.style.top"
+  <div id="full-width">
+    <div id="content-div" >
+      <img *ngFor="let tl of trafficLights()" style="position:relative;cursor: pointer" [src]="tl.assetUrl" [style.top]="tl.style.top"
         [style.right]="tl.style.right" [style.bottom]="tl.style.bottom" [style.left]="tl.style.left" [style.width]="tl.style.width"
-        [style.heigth]="tl.style.heigth" [style.transform]="'rotate(' + tl.style.rotation+')'">
+        [style.heigth]="tl.style.heigth" [style.transform]="'rotate(' + tl.style.rotation+')'" (click)="inverterTrafficLight(tl)">
+
+      <img *ngFor="let tl of trafficLights()" style="position:relative" [src]="tl.peopleTrafficLight.assetUrl"
+        [style.top]="tl.peopleTrafficLight.style.top" [style.right]="tl.peopleTrafficLight.style.right" [style.bottom]="tl.peopleTrafficLight.style.bottom"
+        [style.left]="tl.peopleTrafficLight.style.left" [style.width]="tl.peopleTrafficLight.style.width"
+        [style.heigth]="tl.peopleTrafficLight.style.heigth" [style.transform]="'rotate(' + tl.peopleTrafficLight.style.rotation+')'">
     </div>
   </div>
 </div>

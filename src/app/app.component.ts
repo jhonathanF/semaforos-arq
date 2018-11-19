@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from './services/app.service';
 import { MenuAction } from './models/menu-action';
-import { Observable, interval } from 'rxjs';
+import { AppService } from './services/app.service';
+import { ISAService } from './services/isa.service';
+import { TrafficLightService } from './services/traffic-light.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,9 @@ export class AppComponent implements OnInit {
   title = 'front';
   menuActions: MenuAction[] = [];
   menuActionsHistory: MenuAction[] = [];
-  constructor(private appService: AppService) { }
+  constructor(
+    private trafficLightService: TrafficLightService,
+    private appService: AppService) { }
 
   ngOnInit() {
     this.menuActions.push(new MenuAction(1, 'Fechar Cruzamento de veiculos', 'Fecha os cruzamentos 1, 2, 6 e 7'));
@@ -23,17 +26,14 @@ export class AppComponent implements OnInit {
     this.menuActions.push(new MenuAction(6, 'Sinal de alerta para pedestres', 'Liga o alerta para os pedestres'));
     this.menuActions.push(new MenuAction(7, 'Abrir semaforo virar a esquerda', 'Abre o semaforo entre 6 e 2'));
     this.menuActions.push(new MenuAction(8, 'Fechar semaforo virar a esquerda', 'Fecha o semaforo entre 6 e 2'));
-
-    this.intervalo
-      .subscribe(i => {
-        
-      });
   }
 
   executeMenuAction(menuId: number) {
     const menuClicked = this.menuActions.find(menuAction => menuAction.id === menuId);
     menuClicked.createdAt = new Date();
     this.menuActionsHistory.push(menuClicked);
+
+    this.trafficLightService.receberComando(menuClicked.name);
   }
   sidenavOpened() {
     return this.appService.sidenavOpened;

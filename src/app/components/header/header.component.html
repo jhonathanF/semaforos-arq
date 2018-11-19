@@ -1,3 +1,6 @@
-<mat-toolbar [class.mat-elevation-z2]='true' color="primary">
-  <mat-icon (click)="toggleSide()" style="padding-right: 15px; cursor: pointer;">menu</mat-icon><span>Semaforos</span>
+<mat-toolbar [class.mat-elevation-z2]='true' color="primary" fxLayoutAlign="space-between center">
+  <div>
+    <mat-icon (click)="toggleSide()" style="padding-right: 15px; cursor: pointer;">menu</mat-icon><span>Semaforos</span>
+  </div>
+  <button mat-raised-button color="accent" *ngIf="!isModoAutomatico()" (click)="voltarModoAutomatico()">Voltar pro modo automatico</button>
 </mat-toolbar>
