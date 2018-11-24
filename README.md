@@ -1,6 +1,7 @@
 # Semaforos 
 
-Projeto feito para a materia de Arquitetura de sistemas computacionais, por Jhonathan Luiz De Azevedo Ferreira e Otavio Brandolin Neto 
+Projeto feito para a materia de Arquitetura de sistemas computacionais, por Jhonathan Luiz De Azevedo Ferreira e Otavio Brandolin Neto .
+
 Feito com [Angular CLI](https://github.com/angular/angular-cli) versão 7.0.3.
 
 ## Rodando o projeto
