@@ -22,10 +22,7 @@ export class AppComponent implements OnInit {
     this.menuActions.push(new MenuAction(2, 'Abrir Cruzamento de veiculos', 'Abrir os cruzamentos 1, 2, 6 e 7'));
     this.menuActions.push(new MenuAction(3, 'Sinal de alerta', 'Liga o alerta'));
     this.menuActions.push(new MenuAction(4, 'Abrir cruzamento de pedestres', 'Abre os cruzamentos de pedestre'));
-    this.menuActions.push(new MenuAction(5, 'Fechar Cruzamento de pedestres', 'Fecha os cruzamentos de pedestre'));
-    this.menuActions.push(new MenuAction(6, 'Sinal de alerta para pedestres', 'Liga o alerta para os pedestres'));
-    this.menuActions.push(new MenuAction(7, 'Abrir semaforo virar a esquerda', 'Abre o semaforo entre 6 e 2'));
-    this.menuActions.push(new MenuAction(8, 'Fechar semaforo virar a esquerda', 'Fecha o semaforo entre 6 e 2'));
+    this.menuActions.push(new MenuAction(5, 'Chegada de onibus', 'Faz com que o semaforo de onibus abra mais rápido'));
   }
 
   executeMenuAction(menuId: number) {
@@ -35,6 +32,7 @@ export class AppComponent implements OnInit {
 
     this.trafficLightService.receberComando(menuClicked.name);
   }
+
   sidenavOpened() {
     return this.appService.sidenavOpened;
   }

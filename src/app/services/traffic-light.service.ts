@@ -4,6 +4,7 @@ import { TrafficLight, FECHADO, ABERTO } from '../models/traffic-light';
 import { LightStyle } from '../models/light-style';
 import { ISAService } from './isa.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { interval } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

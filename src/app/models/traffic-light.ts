@@ -1,14 +1,22 @@
-import { PeopleTrafficLight } from './people-traffic-light';
-import { LightStyle } from './light-style';
 import { delay } from 'q';
+import { interval, of, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { LightStyle } from './light-style';
+import { PeopleTrafficLight } from './people-traffic-light';
 export const ABERTO = 0;
 export const FECHADO = 1;
+export const INTERMITENTE = 2;
+
 export class TrafficLight {
     status: number;
     group: number;
     assetUrl: string;
     peopleTrafficLight: PeopleTrafficLight;
     style: LightStyle;
+
+    isModoIntermitente: Subject<boolean> = new Subject<boolean>();
+    tempo = 500;
+    intervalo = interval(this.tempo);
 
     constructor(status: number, group: number, assetUrl: string, peopleTrafficLight: PeopleTrafficLight, style: LightStyle) {
         this.status = status;
@@ -19,6 +27,7 @@ export class TrafficLight {
     }
 
     async changeStatus() {
+        this.isModoIntermitente.next(false);
         if (this.status === ABERTO) {
             this.setFechado();
         } else {
@@ -27,6 +36,7 @@ export class TrafficLight {
     }
 
     async setFechado() {
+        this.isModoIntermitente.next(false);
         this.setAssetAmarelo();
         await delay(2000);
         this.setAssetFechado();
@@ -35,10 +45,31 @@ export class TrafficLight {
     }
 
     async  setAberto() {
+        this.isModoIntermitente.next(false);
         await delay(3000);
         this.setAssetAberto();
         this.peopleTrafficLight.setFechado();
         this.status = ABERTO;
+    }
+
+    modoIntermitente() {
+        this.isModoIntermitente.next(true);
+        let ligado: boolean = false;
+        this.peopleTrafficLight.setFechado();
+        this.intervalo.pipe(takeUntil(this.isModoIntermitente)).subscribe(() => {
+            if (ligado) {
+                this.setAssetAmarelo();
+            } else {
+                this.setAssetOff();
+            }
+            this.peopleTrafficLight.setFechado();
+            ligado = !ligado;
+        });
+        this.status = INTERMITENTE;
+    }
+
+    setAssetOff() {
+        this.assetUrl = '../../../assets/semaforos/off.png';
     }
 
     setAssetFechado() {

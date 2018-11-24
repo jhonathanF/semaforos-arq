@@ -11,8 +11,8 @@ import { TrafficLight } from 'src/app/models/traffic-light';
 export class HomeComponent implements OnInit {
 
   comando: string = '';
-  teste = 10000;
-  intervalo = interval(this.teste);
+  tempo = 10000;
+  intervalo = interval(this.tempo);
   constructor(
     private trafficLightService: TrafficLightService
   ) { }
